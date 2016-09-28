@@ -9,20 +9,36 @@ var config = {
 firebase.initializeApp(config);
 
 
+
 $("#submit").on('click', function(e){
 
 	e.preventDefault();
-	var name = $('#name').val();
-	var destination = $('#destination').val();
-	var firstTime = $('#firstTime').val();
-	var frequency = $('#frequency').val();
+	var name = $('#name').val().trim();
+	var destination = $('#destination').val().trim();
+	var firstTime = $('#firstTime').val().trim();
+	var frequency = $('#frequency').val().trim();
 
 	console.log(name);
 	console.log(destination);
 	console.log(firstTime);
 	console.log(frequency);
 
+	var newTrain = {
+		train: name,
+		destination: destination,
+		first_time: firstTime,
+		frequent: frequency
+	}
 
-	$('.table').append("<tr><td>"+ name +"</td><td>"+ destination +"</td><td>"+ firstTime +"</td><td>"+ frequency +"</td><td>##</td></tr>");
-	// return false;
+	train.push(newTrain);
+
+	// clear form
+	$('#name').val();
+	$('#destination').val();
+	$('#firstTime').val();
+	$('#frequency').val();
+
+	// $('.table').append("<tr><td>"+ name +"</td><td>"+ destination +"</td><td>"+ firstTime +"</td><td>"+ frequency +"</td><td>##</td></tr>");
+	
+
 });	

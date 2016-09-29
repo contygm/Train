@@ -5,9 +5,8 @@ var config = {
     storageBucket: "train-cb239.appspot.com",
     messagingSenderId: "337035393373"
 };
-
 firebase.initializeApp(config);
-
+var train = firebase.database().ref();
 
 
 $("#submit").on('click', function(e){
@@ -18,25 +17,25 @@ $("#submit").on('click', function(e){
 	var firstTime = $('#firstTime').val().trim();
 	var frequency = $('#frequency').val().trim();
 
-	console.log(name);
-	console.log(destination);
-	console.log(firstTime);
-	console.log(frequency);
-
 	var newTrain = {
-		train: name,
+		name: name,
 		destination: destination,
-		first_time: firstTime,
-		frequent: frequency
+		firstTime: firstTime,
+		frequency: frequency
 	}
 
 	train.push(newTrain);
 
+	console.log(newTrain.name);
+	console.log(newTrain.destination);
+	console.log(newTrain.firstTime);
+	console.log(newTrain.frequency);
+
 	// clear form
-	$('#name').val();
-	$('#destination').val();
-	$('#firstTime').val();
-	$('#frequency').val();
+	$('#name').val("");
+	$('#destination').val("");
+	$('#firstTime').val("");
+	$('#frequency').val("");
 
 	// $('.table').append("<tr><td>"+ name +"</td><td>"+ destination +"</td><td>"+ firstTime +"</td><td>"+ frequency +"</td><td>##</td></tr>");
 	

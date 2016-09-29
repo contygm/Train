@@ -11,11 +11,12 @@ var train = firebase.database().ref();
 
 $("#submit").on('click', function(e){
 
-	e.preventDefault();
 	var name = $('#name').val().trim();
 	var destination = $('#destination').val().trim();
 	var firstTime = $('#firstTime').val().trim();
 	var frequency = $('#frequency').val().trim();
+
+// if statments for invalid data, use bootstrap red fields
 
 	var newTrain = {
 		name: name,
@@ -36,8 +37,34 @@ $("#submit").on('click', function(e){
 	$('#destination').val("");
 	$('#firstTime').val("");
 	$('#frequency').val("");
-
-	// $('.table').append("<tr><td>"+ name +"</td><td>"+ destination +"</td><td>"+ firstTime +"</td><td>"+ frequency +"</td><td>##</td></tr>");
 	
-
+	return false;
 });	
+
+train.on("child_added", function(childSnapshot, prevChildKey){
+
+	var name = childSnapshot.val().name;
+	var destination = childSnapshot.val().destination;
+	var firstTime = childSnapshot.val().firstTime;
+	var frequency = childSnapshot.val().frequency;
+
+	console.log(name);
+	console.log(destination);
+	console.log(firstTime);
+	console.log(frequency);
+
+	var firstTrain = moment(firstTime);
+
+	var currentTime = moment();
+
+	$('.table').append("<tr><td>"+ name +"</td><td>"+ destination +"</td><td>"+ firstTime +"</td><td>"+ frequency +"</td><td>##</td></tr>");
+})
+
+
+
+
+
+
+
+
+
